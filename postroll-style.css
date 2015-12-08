@@ -490,6 +490,7 @@ body {
   }
   .footer-right {
     display: table;
+    table-layout: fixed;
   }
   .cta-wrapper {
     display: table-cell;
@@ -564,6 +565,7 @@ body {
   }
   .footer-right {
     display: table;
+    table-layout: fixed;
   }
   .cta-wrapper {
     display: table-cell;
