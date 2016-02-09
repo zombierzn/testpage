@@ -2,8 +2,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="author" content="Vungle">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Vungle Endcard</title>
@@ -49,11 +47,25 @@
 			function doSomething(s) {
 				return actionClicked(s);
 			}
-
+			window.isWin81 = !!(navigator.userAgent.match('Windows Phone 8.1'));
+			var metaEl = document.createElement("meta");
+			metaEl.setAttribute("name", "viewport");
+			metaEl.setAttribute("content", "initial-scale = 1.0,maximum-scale = 1.0");
+			document.head.appendChild(metaEl);
 			var bottomContainer = document.getElementById('bottom-container');
 
 			function updateCSS() {
+				if (window.isWin81)
+				{
+					if (window.innerHeight < window.innerWidth){
+						metaEl.setAttribute("content", "initial-scale = 0.5,maximum-scale = 0.5");
+						document.body.classList.add('landscape');
 
+					}else{
+						metaEl.setAttribute("content", "initial-scale = 1.0,maximum-scale = 1.0");
+						document.body.classList.remove('landscape');
+					}
+				}
 				var topContainerHeight = document.getElementById('top-container').offsetHeight;
 				var footerHeight = document.getElementById('footer').offsetHeight;
 
@@ -64,13 +76,12 @@
 					bottomContainerHeight = window.innerHeight-footerHeight;
 					bottomContainer.style.height = bottomContainerHeight+'px';
 				}
-				
+
 				var copyCenterHeight = document.getElementById('copy-center').clientHeight;
 				var copyContainerHeight = document.getElementById('copy-container').clientHeight;
-				
+
 				var copySpacing = (copyContainerHeight-copyCenterHeight)/2;
 				document.getElementById('copy-center').style.marginTop = copySpacing+'px';
-
 			}
 			
 			window.onload = function() {
