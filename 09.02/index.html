@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="author" content="Vungle">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Vungle Endcard</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body ontouchstart="ontouchstart" class="preload">
+		<div id="vungle-header" class="light-theme"> 
+			<a id="vungle-close" data-icon="i" href="javascript:void(0)" onclick="doSomething('close')"></a>
+		</div>
+		
+		<div id="top-container"></div>
+		
+		<div id="bottom-container">
+			<div id="copy-container" class="copy-container">
+				<div id="copy-center" class="copy-center">
+					<img class="app-icon" src="app-icon.jpg" alt="App Icon">
+					<h1>Candy Crush Soda Saga</h1>
+					<p class="stars">
+						<span class="dark star" data-icon="n"></span>
+						<span class="dark star" data-icon="n"></span>
+						<span class="dark star" data-icon="n"></span>
+						<span class="dark star" data-icon="n"></span>
+						<span class="dark star" data-icon="o"></span>
+						<span class="review-count">(1,512)</span>
+					</p>
+					<div class="price">
+						<span class="price-main">Free</span>
+						<sup class="price-sub">+</sup>
+					</div>
+					<div class="horizontal-line"></div>
+					<a id="vungle-cta" class="cta" href="javascript:void(0)" onclick="doSomething('download')">Get the app</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="footer">
+			<div class="logo-container">
+				<img src="windows-vungle.svg" alt="Windows and Vungle">
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			function doSomething(s) {
+				return actionClicked(s);
+			}
+
+			var bottomContainer = document.getElementById('bottom-container');
+
+			function updateCSS() {
+
+				var topContainerHeight = document.getElementById('top-container').offsetHeight;
+				var footerHeight = document.getElementById('footer').offsetHeight;
+
+				if(window.innerHeight > window.innerWidth){
+					bottomContainerHeight = (window.innerHeight-topContainerHeight)-footerHeight;
+					bottomContainer.style.height = bottomContainerHeight+'px';
+				} else {
+					bottomContainerHeight = window.innerHeight-footerHeight;
+					bottomContainer.style.height = bottomContainerHeight+'px';
+				}
+				
+				var copyCenterHeight = document.getElementById('copy-center').clientHeight;
+				var copyContainerHeight = document.getElementById('copy-container').clientHeight;
+				
+				var copySpacing = (copyContainerHeight-copyCenterHeight)/2;
+				document.getElementById('copy-center').style.marginTop = copySpacing+'px';
+
+			}
+			
+			window.onload = function() {
+				document.body.classList.remove("preload");
+				updateCSS();
+			};
+			
+			window.onresize = function() {
+				updateCSS();
+			};
+			
+			document.ontouchmove = function(e){
+				e.preventDefault();
+			}			
+		</script>
+	</body>
+</html>
